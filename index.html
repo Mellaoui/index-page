@@ -1,0 +1,1142 @@
+<!doctype html>
+<html <?php language_attributes(); ?>>
+<head>
+<meta charset="<?php bloginfo( 'charset' ); ?>">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="welcome">
+<link rel="profile" href="http://gmpg.org/xfn/11">
+<link rel="pingback" href="<?php bloginfo( 'pingback_url' ); ?>">
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css" rel="stylesheet">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+
+
+<?php wp_head(); ?>
+</head>
+
+<body <?php body_class(); ?>>
+
+<?php wp_body_open(); ?>
+<style>
+body{
+	overflow-x: hidden;
+}
+
+.header{
+	position: fixed;
+	height:auto;
+  	width: 100%;
+	z-index:999;
+  	background-color: black;
+	justify-content: space-around;
+}
+
+
+.active{
+	display: flex;
+	flex-direction: row;
+	padding-top: 0px;		
+}
+
+.scroll{
+	display: none;
+}
+
+.col-full{
+ display: flex;
+}
+
+
+#menu-top-menu{
+	color: white;
+	padding-left: 60px;
+	display: flex;
+	justify-content: space-between;
+	gap: 10px 20px;
+	
+  }
+#menu-item-51 a{
+	color: #fcfbf7;
+}
+
+.main-navigation{
+	padding-right: 2rem;
+	padding-top: 0.50rem;
+}
+
+#site-header-cart{
+	padding-top: 0.5rem;
+	
+}
+#site-header-cart > li > a{
+	color: white;
+}
+
+.main-navigation ul.menu ul.sub-menu{
+	display: none;
+	position: absolute;
+	background-color: black;
+	box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+	padding: 12px 16px;
+	
+}
+
+
+
+.main-navigation ul li a{
+	color: white;
+	margin: 0px 6px 0 0;
+	
+}
+
+.widget_product_search > .woocommerce-product-search > input{
+	padding-top: 0.5rem;
+	padding-bottom: 0.5rem;
+	border-radius: 0.375rem;
+	padding-left: 2.5rem;
+	outline: 2px solid transparent;
+	outline-offset: 2px;
+}
+.widget_product_search > .woocommerce-product-search > button{
+	padding: 0.25rem;
+	border-radius: 0.375rem;
+}
+
+.storefront-sticky-add-to-cart{
+	display: none;
+}
+
+#dropdownshop{
+	display: none;
+}
+
+.shops:hover .dropdown{
+	display: block;
+}
+#search{
+	display: none;
+	-webkit-box-shadow: 0px 0px 15px -6px #000000; 
+	box-shadow: 0px 0px 15px -6px #000000;
+	-webkit-transition: all 2s ease;  
+  -moz-transition: all 2s ease;  
+  -o-transition: all 2s ease;  
+  -ms-transition: all 2s ease;  
+  transition: all 2s ease;
+} 
+.search-field{
+	background-color: #121211;
+	height: 2rem;	
+	border-radius: 15px;
+	margin-bottom: 3rem;
+	
+}
+
+#woocommerce-product-search-field-0{
+	width: 15rem;
+	height: 3rem;
+}
+.search-field:focus{
+	background-color: white;
+	outline: none;
+	border-bottom: 1px solid;
+}
+.woocommerce-product-search button{
+	display: none;
+	border-radius: 5px;
+	background-color: #121211;
+	color: white;
+}
+
+
+.dropdown:hover .dropdown-content {
+	display: flex;
+	flex-direction: row;
+	height: 10rem;
+	z-index: 999;
+}
+</style>
+
+
+<div id="page" class="hfeed site">
+	
+	
+	
+	<header id="masthead" class="header w-screen flex flex-wrap" role="banner" style="<?php storefront_header_styles(); ?>">
+
+		
+			
+			
+							<style>
+								/* since nested groupes are not supported we have to use 
+									regular css for the nested dropdowns 
+								*/
+								li>ul                 { transform: translatex(100%) scale(0) }
+								li:hover>ul           { transform: translatex(101%) scale(1) }
+								li > button svg       { transform: rotate(-90deg) }
+								li:hover > button svg { transform: rotate(-270deg) }
+
+								/* Below styles fake what can be achieved with the tailwind config
+									you need to add the group-hover variant to scale and define your custom
+									min width style.
+									See https://codesandbox.io/s/tailwindcss-multilevel-dropdown-y91j7?file=/index.html
+									for implementation with config file
+								*/
+								.group:hover .group-hover\:scale-100 { transform: scale(1) }
+								.group:hover .group-hover\:-rotate-180 { transform: rotate(180deg) }
+								.scale-0 { transform: scale(0) }
+								.min-w-32 { min-width: 8rem }
+							</style>
+			<div id="banner" class="flex bg-red-500 h-10 w-screen justify-center items-center ">
+				<h3 class="text-white text-sm uppercase">order 100$ + free shipping</h3>
+			</div>
+			<!--mobile nav-->
+			<div class=" w-screen bg-black flex flex-row items-center justify-center lg:hidden">
+				<div class="container flex h-30 flex-wrap justify-between items-center">
+					<div  class="flex flex-row-reverse ">
+							<a class=" text-white" href="">
+								<i class="fas fa-bars"></i>
+							</a>
+					</div >
+					<div class="logo block items-center justify-center py-2 h-16 w-16 ">
+						<a href="/" class="logolink" title="Jiju" accessibility-size="16">
+							<img height="35" width="64" src="https://jiju.co/wp-content/uploads/2021/01/jiju-logo-white.png" loading="lazy" class="logoimg logo-dark" alt="Jiju">
+						</a>
+					</div>
+					<div class=" text-center ">
+							<a href="<?php echo wc_get_cart_url(); ?>" class=" flex rounded-lg focus:outline-none focus:shadow-outline text-white">
+									<svg aria-hidden="true" data-prefix="fas" data-icon="shopping-cart" class="svg-inline--fa fa-shopping-cart fa-w-18 h-6 lg:w-6" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512"><path fill="currentColor" d="M528.12 301.319l47.273-208C578.806 78.301 567.391 64 551.99 64H159.208l-9.166-44.81C147.758 8.021 137.93 0 126.529 0H24C10.745 0 0 10.745 0 24v16c0 13.255 10.745 24 24 24h69.883l70.248 343.435C147.325 417.1 136 435.222 136 456c0 30.928 25.072 56 56 56s56-25.072 56-56c0-15.674-6.447-29.835-16.824-40h209.647C430.447 426.165 424 440.326 424 456c0 30.928 25.072 56 56 56s56-25.072 56-56c0-22.172-12.888-41.332-31.579-50.405l5.517-24.276c3.413-15.018-8.002-29.319-23.403-29.319H218.117l-6.545-32h293.145c11.206 0 20.92-7.754 23.403-18.681z"/></svg>
+								<span class="hidden lg:flex font-thin">
+									<?php echo WC()->cart->get_cart_total(); ?>
+								</span>
+								<span class="flex lg:hidden font-light text-white items-center text-right relative rounded-full w-4 h-5 bg-red-500 shadow-xl  ">
+										<?php echo WC()->cart->get_cart_contents_count(); ?>
+								</span>
+							</a>
+					</div>
+				</div>
+			</div>
+			<!--end-->
+			<div id="navbar" class=" hidden w-screen shadow-lg lg:flex lg:flex-col lg:items-center p-1 lg:justify-between bg-white shadow-xs">
+					<div id="logo" class="logo block items-center justify-center h-16 w-16 pt-3">
+						<?php
+							$custom_logo_id = get_theme_mod( 'custom_logo' );
+							$logo = wp_get_attachment_image_src( $custom_logo_id , 'full' );
+							 
+							if ( has_custom_logo() ) {
+								echo '
+								<a href="/" class="logolink" title="Jiju" accessibility-size="16">
+									<img height="25" width="44" src="' . esc_url( $logo[0] ) . '" alt="' . get_bloginfo( 'name' ) . '">
+								</a>	
+									';
+							} else {
+								echo '<h1>' . get_bloginfo('name') . '</h1>';
+							}
+						?>
+						
+					</div>
+					<div class="w-screen flex flex-row items-center p-1 justify-between shadow-xs">
+						<div id="social" class="ml-8 text-lg text-gray-900 hidden md:flex">
+							<div class="md:flex-auto md:flex-row-reverse mt-2 flex-row flex">
+								<a href="#" class="w-6 mx-1 text-blue-700">
+									<i class="fab fa-facebook"></i>
+								</a>
+								<a href="#" class="w-6 mx-1 text-blue-300">
+									<i class="fab fa-twitter"></i>
+								</a>
+								<a href="#" class="w-6 mx-1 text-red-500">
+									<i class="fab fa-youtube"></i>
+								</a>
+								<a href="#" class="w-6 mx-1 text-pink-500">
+									<i class="fab fa-instagram"></i>
+								</a>
+							</div>
+						</div>
+							<div id="nav-links" class="w-screen md:w-1/3 h-auto pl-16 border-gray-300 text-sm rounded-full flex">
+								<div class="text-gray-900 text-center  px-4 py-2 m-2">
+								<!--dorpdown shops list-->
+										<div class="group inline-block">
+											<button
+												class=" outline-none focus:outline-none border-none lg:px-3 py-1 text-black bg-white rounded-sm flex items-center min-w-32"
+											>
+												<span class="tracking-widest rounded-lg focus:outline-none focus:shadow-outline text-black lg:pr-1 font-semibold flex-1 hover:text-gray-900">Shops</span>
+												<span>
+												<svg
+													class="hidden lg:block fill-current h-4 w-4 transform group-hover:-rotate-180
+													transition duration-150 ease-in-out"
+													xmlns="http://www.w3.org/2000/svg"
+													viewBox="0 0 20 20"
+												>
+													<path
+													d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z"
+													/>
+												</svg>
+												</span>
+											</button>
+												
+													<ul
+														class=" bg-white border rounded-sm transform scale-0 group-hover:scale-100 absolute 
+													transition duration-150 ease-in-out origin-top min-w-32"
+													>
+														<!--CAT-->	
+														<li class="rounded-sm px-3 py-1 hover:bg-gray-300">
+															<button class="w-full bg-white text-left flex items-center outline-none focus:outline-none">
+																<span class="pr-1 flex-1 uppercase font-light lg:font-bold text-black">for dry herbs</span>
+																<span class="mr-auto">
+																<svg
+																	class="fill-current h-4 w-4
+																	transition duration-150 ease-in-out"
+																	xmlns="http://www.w3.org/2000/svg"
+																	viewBox="0 0 20 20"
+																>
+																	<path
+																	d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z"
+																	/>
+																</svg>
+															</button>
+															<ul class="bg-white border rounded-sm absolute top-0 right-0 
+																transition duration-150 ease-in-out origin-top-left
+																min-w-32">
+																<li class="px-3 py-1 hover:bg-gray-300"><a class="text-black font-light lg:font-normal " href="https://staging.jiju.co/product-category/bongs/">Bongs</a></li>
+																<li class="px-3 py-1 hover:bg-gray-300"><a href="https://staging.jiju.co/product-category/grinders/" class="text-black font-light lg:font-normal">Grinders</a></li>
+																<li class="px-3 py-1 hover:bg-gray-300"><a class="text-black font-light lg:font-normal "  href="https://staging.jiju.co/product-category/pipes/">Pipes</a></li>
+																<li class="px-3 py-1 hover:bg-gray-300"><a class="text-black font-light lg:font-normal "  href="https://staging.jiju.co/product-category/jars/">Jars</a></li>
+																<li class="px-3 py-1 hover:bg-gray-300"><a class="text-black font-light lg:font-normal "  href="https://staging.jiju.co/product-category/rolling-trays/">Rolling Trays</a></li>
+															</ul>
+														</li>
+														<!--CAT-->
+														<li class="rounded-sm px-3 py-1 hover:bg-gray-300">
+															<button	class="w-full bg-white text-left flex items-center outline-none focus:outline-none">
+																<span class="pr-1 flex-1 uppercase font-light lg:font-bold  text-black">for concentrates</span>
+																<span class="mr-auto">
+																<svg
+																	class="fill-current h-4 w-4
+																	transition duration-150 ease-in-out"
+																	xmlns="http://www.w3.org/2000/svg"
+																	viewBox="0 0 20 20"
+																>
+																	<path
+																	d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z"
+																	/>
+																</svg>
+																</span>
+															</button>
+															<ul class="bg-white border rounded-sm absolute top-0 right-0 
+																transition duration-150 ease-in-out origin-top-left
+																min-w-32">
+																<li class="px-3 py-1 hover:bg-gray-300"><a class="text-black font-light lg:font-normal "  href="#">Dab Rigs</a></li>
+																<!---
+																	<li class="rounded-sm relative px-3 py-1 hover:bg-gray-100">
+																	<button
+																		class="w-full text-left flex items-center outline-none focus:outline-none"
+																	>
+																		<span class="pr-1 flex-1">Python</span>
+																		<span class="mr-auto">
+																		<svg
+																			class="fill-current h-4 w-4
+																			transition duration-150 ease-in-out"
+																			xmlns="http://www.w3.org/2000/svg"
+																			viewBox="0 0 20 20"
+																		>
+																			<path
+																			d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z"
+																			/>
+																		</svg>
+																		</span>
+																	</button>
+																	</li>
+																-->
+																<li class="px-3 py-1 hover:bg-gray-300"><a class="text-black font-light lg:font-normal "  href="https://staging.jiju.co/shop/dab-mat/silicone-dab-mat-luminous/">Dab Mats</a></li>
+																<li class="px-3 py-1 hover:bg-gray-300"><a class="text-black font-light lg:font-normal "  href="#">Dab Accessories</a></li>
+															</ul>
+														</li>
+														<!--CAT-->
+														<li class="rounded-sm relative px-3 py-1 hover:bg-gray-300">
+															<button
+																class="w-full bg-white text-left flex items-center outline-none focus:outline-none "
+															>
+																<span class="pr-1 flex-1 uppercase font-light lg:font-bold  text-black">Other Accessories</span>
+																<span class="mr-auto">
+																<svg
+																	class="fill-current h-4 w-4
+																	transition duration-150 ease-in-out"
+																	xmlns="http://www.w3.org/2000/svg"
+																	viewBox="0 0 20 20"
+																>
+																	<path
+																	d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z"
+																	/>
+																</svg>
+																</span>
+															</button>
+															<ul class="bg-white border rounded-sm absolute top-0 right-0 
+																transition duration-150 ease-in-out origin-top-left
+																min-w-32">
+																<li class="px-3 py-1 hover:bg-gray-300"> <a class="text-black font-light lg:font-normal "  href="#">Ashtrays</a></li>
+																<!--
+																	<li class="rounded-sm relative px-3 py-1 hover:bg-gray-100">
+																	<button
+																		class="w-full text-left flex items-center outline-none focus:outline-none"
+																	>
+																		<span class="pr-1 flex-1">Python</span>
+																		<span class="mr-auto">
+																		<svg
+																			class="fill-current h-4 w-4
+																			transition duration-150 ease-in-out"
+																			xmlns="http://www.w3.org/2000/svg"
+																			viewBox="0 0 20 20"
+																		>
+																			<path
+																			d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z"
+																			/>
+																		</svg>
+																		</span>
+																	</button>
+																	</li>
+																-->
+																<li class="px-3 py-1 hover:bg-gray-300"> <a class="text-black font-light lg:font-normal "  href="#">Lighters</a></li>
+																<li class="px-3 py-1 hover:bg-gray-300"> <a class="text-black font-light lg:font-normal "  href="#">Rolling Machines</a></li>
+															</ul>
+														</li>
+														<!--CAT-->
+														<li class="rounded-sm relative px-3 py-1 hover:bg-gray-300">
+															<button
+																class="w-full bg-white text-left flex items-center outline-none focus:outline-none"
+															>
+																<span class="pr-1 flex-1 uppercase font-light lg:font-bold  text-black">Hookahs</span>
+																<span class="mr-auto">
+																<svg
+																	class="fill-current h-4 w-4
+																	transition duration-150 ease-in-out"
+																	xmlns="http://www.w3.org/2000/svg"
+																	viewBox="0 0 20 20"
+																>
+																	<path
+																	d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z"
+																	/>
+																</svg>
+																</span>
+															</button>
+															<ul class="bg-white border rounded-sm absolute top-0 right-0 
+																transition duration-150 ease-in-out origin-top-left
+																min-w-32">
+																<li class="px-3 py-1 hover:bg-gray-300"> <a class="text-black font-light lg:font-normal " href="https://staging.jiju.co/hookah-series/"> Latest Series</a></li>
+																<li class="px-3 py-1 hover:bg-gray-300"> <a class="text-black font-light lg:font-normal" href="https://staging.jiju.co/product-category/hookah/">All Hookahs</a></li>
+															</ul>
+														</li>
+
+														<li class="rounded-sm relative px-3 py-1 hover:bg-gray-300">
+															<button
+																class="w-full bg-white text-left flex items-center outline-none focus:outline-none"
+															>
+																<span class="pr-1 flex-1 uppercase font-light lg:font-bold  text-black">Vaporizes</span>
+																<span class="mr-auto">
+																<svg
+																	class="fill-current h-4 w-4
+																	transition duration-150 ease-in-out"
+																	xmlns="http://www.w3.org/2000/svg"
+																	viewBox="0 0 20 20"
+																>
+																	<path
+																	d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z"
+																	/>
+																</svg>
+																</span>
+															</button>
+															<ul class="bg-white border rounded-sm absolute top-0 right-0 
+																transition duration-150 ease-in-out origin-top-left
+																min-w-32">
+																<li class="px-3 py-1 hover:bg-gray-300"> <a class="text-black font-light lg:font-normal " href="https://staging.jiju.co/shop/vaporizers/curer/"> Curer</a></li>
+																<li class="px-3 py-1 hover:bg-gray-300"> <a class="text-black font-light lg:font-normal" href="https://staging.jiju.co/shop/vaporizers/tokes-vape-phuse/">SOC</a></li>
+																<li class="px-3 py-1 hover:bg-gray-300"> <a class="text-black font-light lg:font-normal" href="https://staging.jiju.co/shop/vaporizers/lookah-q7-portable-enail-vaporizer/">LOOKAH</a></li>
+															</ul>
+														</li>
+													</ul>
+											</div>
+								</div>
+								<div class=" px-4 pt-3 m-2">
+									<a class="text-black font-semibold text-center" href="#">Account</a>
+								</div>
+								<div class="group px-4 pt-2 m-2">
+											<button
+												class=" outline-none focus:outline-none border-none lg:px-3 py-1 text-black bg-white rounded-sm flex items-center min-w-32"
+											>
+												<span class="tracking-widest rounded-lg focus:outline-none focus:shadow-outline text-black lg:pr-1 font-semibold flex-1 hover:text-gray-300">Brands</span>
+												<span>
+												<svg
+													class="hidden lg:block fill-current h-4 w-4 transform group-hover:-rotate-180
+													transition duration-150 ease-in-out"
+													xmlns="http://www.w3.org/2000/svg"
+													viewBox="0 0 20 20"
+												>
+													<path
+													d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z"
+													/>
+												</svg>
+												</span>
+											</button>
+									
+											<ul class="flex flex-row bg-white border rounded-sm transform scale-0 group-hover:scale-100 absolute 
+													transition duration-150 ease-in-out origin-top min-w-32">
+													<li class="px-3 py-1 hover:bg-gray-300"><a class="text-black font-light lg:font-normal " href="https://www.amazon.com/stores/HOKirin/page/697A60E9-46E6-4089-BB3F-E2D320284003?ref_=ast_bln">
+														<img class="image" src="https://jiju.co/wp-content/uploads/2021/04/yeah-e1617978643814.png" alt="" width="95" height="95">
+													</a></li>
+													<li class="px-3 py-1 hover:bg-gray-300"><a class="text-black font-light lg:font-normal " href="https://staging.jiju.co/product-category/bongs/">
+														<img width="80" height="80" src="https://jiju.co/wp-content/uploads/2021/01/yufan-100x100.png" class="image wp-image-4134  attachment-80x80 size-80x80" alt="" loading="lazy" style="max-width: 100%; height: auto;" srcset="https://jiju.co/wp-content/uploads/2021/01/yufan-100x100.png 100w, https://jiju.co/wp-content/uploads/2021/01/yufan-20x20.png 20w" sizes="(max-width: 80px) 100vw, 80px">
+													</a></li>
+													<li class="px-3 py-1 hover:bg-gray-300"><a class="text-black font-light lg:font-normal " href="https://staging.jiju.co/product-category/bongs/">
+														<img width="80" height="80" src="https://jiju.co/wp-content/uploads/2021/01/onuoss-100x100.png" class="image wp-image-4133  attachment-80x80 size-80x80" alt="" loading="lazy" style="max-width: 100%; height: auto;" srcset="https://jiju.co/wp-content/uploads/2021/01/onuoss-100x100.png 100w, https://jiju.co/wp-content/uploads/2021/01/onuoss-20x20.png 20w" sizes="(max-width: 80px) 100vw, 80px">
+													</a></li>
+											</ul>
+								</div>
+									
+
+								<div class=" px-4 pt-3 m-2">
+									<a class="text-black font-semibold text-center" href="#">Wishlist</a>
+								</div>
+								
+							</div>
+							
+							<div class="flex flex-row-reverse mr-8  md:flex">
+								<div class=" text-center  px-4 py-2 m-2">
+									<a href="<?php echo wc_get_cart_url(); ?>" class=" flex rounded-lg focus:outline-none focus:shadow-outline text-blue-800">
+										<svg aria-hidden="true" data-prefix="fas" data-icon="shopping-cart" class="svg-inline--fa fa-shopping-cart fa-w-18 h-6 lg:w-6" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512"><path fill="currentColor" d="M528.12 301.319l47.273-208C578.806 78.301 567.391 64 551.99 64H159.208l-9.166-44.81C147.758 8.021 137.93 0 126.529 0H24C10.745 0 0 10.745 0 24v16c0 13.255 10.745 24 24 24h69.883l70.248 343.435C147.325 417.1 136 435.222 136 456c0 30.928 25.072 56 56 56s56-25.072 56-56c0-15.674-6.447-29.835-16.824-40h209.647C430.447 426.165 424 440.326 424 456c0 30.928 25.072 56 56 56s56-25.072 56-56c0-22.172-12.888-41.332-31.579-50.405l5.517-24.276c3.413-15.018-8.002-29.319-23.403-29.319H218.117l-6.545-32h293.145c11.206 0 20.92-7.754 23.403-18.681z"/></svg>
+										<span class="hidden lg:flex font-thin">
+											<?php echo WC()->cart->get_cart_total(); ?>
+										</span>
+										<span class="flex lg:hidden font-light text-blue-800 items-center text-right relative rounded-full w-4 h-5 bg-red-500 shadow-xl  ">
+											<?php echo WC()->cart->get_cart_contents_count(); ?>
+										</span>
+									</a>
+								</div>
+								<div class="text-center px-4 py-2 m-2">
+									<a onclick="show()" href="#">
+										<i class="fas fa-search text-black px-6"></i>
+									</a>
+									<script>
+										function show(){
+											document.getElementById("search").style.display="block";
+										}
+										function hide(){
+											document.getElementById("search").style.display="none";
+										}
+
+										
+									</script>
+								</div>
+						</div>
+					</div>		
+					<div id="search" class="search fixed flex  justify-center items-center w-full h-40 pt-20 bg-white z-50 transition duration-150 ease-in-out shadow-lg ">
+						<button onclick="hide()" class="object-right-top  focus:outline-none bg-white w-6 h-6 lg:w-12 lg:h-12 p-2 text-sm font-bold tracking-wider text-black rounded-full hover:bg-blue-600 hover:text-white inline-flex items-center justify-center">
+									<svg xmlns="http://www.w3.org/2000/svg" class="fill-current transform rotate-45" viewBox="0 0 24 24"><path d="M24 10h-10v-10h-4v10h-10v4h10v10h4v-10h10z"/></svg>
+						</button>
+						<div class="flex items-center justify-center w-screen h-full bg-white">
+								<div class="relative text-gray-600 focus-within:text-gray-400">
+									<span class="absolute inset-y-0 left-0 flex items-center pl-2">
+										<button type="submit" class="hidden p-1 focus:outline-none focus:shadow-outline bg-gray-100">
+											<svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" class="w-6 h-6"><path d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path></svg>
+										</button>
+									</span>
+									<?php 
+										get_product_search_form();
+									?>
+								</div>
+						</div>
+					</div>
+			</div> 
+
+			
+					
+			<!--<a class="cart-contents" href="<?php echo wc_get_cart_url(); ?>" title="<?php _e( 'View your shopping cart' ); ?>"><?php echo sprintf ( _n( '%d item', '%d items', WC()->cart->get_cart_contents_count() ), WC()->cart->get_cart_contents_count() ); ?> - <?php echo WC()->cart->get_cart_total(); ?></a>-->
+			
+	</header><!-- #masthead -->
+	
+	<script>
+		var myNav =$("#navbar");
+		var myBanner =$("#banner")
+		$(window).on('scroll', function(){
+			if($(window).scrollTop() >= 280){
+				myNav.addClass('active');
+			}else{
+				myNav.removeClass('active');
+			}
+		});
+
+		$(window).on('scroll',function(){
+			if($(window).scrollTop() >= 280){
+				myBanner.addClass('scroll');
+			}else{
+				myBanner.removeClass('scroll');
+			}
+		})
+	</script>
+	
+
+	<main id="content" class="site-content justify-center items-center w-full pt-32 lg:pt-40" tabindex="-1">
+		<div class="relative">
+						
+			
+
+
+<style>
+                 .product{
+                    position: relative;
+                    display: flex;
+                    flex-direction: column;
+                    background: white;
+                    padding-bottom: 2rem;
+                    text-align: center;
+                    height: inherit!important;
+                    overflow: hidden;
+                 }   
+                 .products li{
+                    list-style: none;
+                 }
+
+                 .product li a{
+                    margin-left: 30rem;
+                 }
+                 .woocommerce-loop-product__title{
+                    font-size: 1.1rem;
+                    font-weight: 500;
+                    margin: 0 0 .5rem;
+                    padding-top: 10rem;
+                    height: 35px;
+                    border-bottom: none;
+                    text-transform: uppercase;
+                    list-style: none;
+                 }
+                 .woocommerce-LoopProduct-link{
+                    justify-content: center;
+                    justify-items: center;
+                    display: flex;
+                 }
+
+                 .price{
+                    display: none;
+                    color: black;
+                 }
+
+                 .price:hover{
+                    color: #eb4034;
+                 }
+                  .button{
+                    display: none;
+                 }
+
+                 .onsale {
+					display:none;
+                    top: 0;
+                    left: 0;
+                    right: auto;
+                    margin: 0;
+                    border: 1px solid green;
+                    border-radius: 15px;
+                    background-color: green;
+                    color: white;
+                }
+
+                .img{
+                    width: 500px;
+                    height: 500px;
+                    object-fit: cover;
+                }
+                .carousel {
+                    position: relative;
+                    box-shadow: 0px 1px 6px rgba(0, 0, 0, 0.64);
+                    
+                }
+
+                .carousel-inner {
+                    position: relative;
+                    overflow: hidden;
+                    width: 100%;
+                }
+
+                .carousel-open:checked + .carousel-item {
+                    position: static;
+                    opacity: 100;
+                }
+
+                .carousel-item {
+                    position: absolute;
+                    opacity: 0;
+                    -webkit-transition: opacity 0.6s ease-out;
+                    transition: opacity 0.6s ease-out;
+                }
+
+                .carousel-item img {
+                    display: block;
+                    height: auto;
+                    max-width: 100%;
+                }
+
+                .carousel-control {
+                    background: rgba(0, 0, 0, 0.28);
+                    border-radius: 50%;
+                    color: #fff;
+                    cursor: pointer;
+                    display: none;
+                    font-size: 40px;
+                    height: 40px;
+                    line-height: 35px;
+                    position: absolute;
+                    top: 50%;
+                    -webkit-transform: translate(0, -50%);
+                    cursor: pointer;
+                    -ms-transform: translate(0, -50%);
+                    transform: translate(0, -50%);
+                    text-align: center;
+                    width: 40px;
+                    z-index: 10;
+                }
+
+                .carousel-control.prev {
+                    left: 2%;
+                }
+
+                .carousel-control.next {
+                    right: 2%;
+                }
+
+                .carousel-control:hover {
+                    background: rgba(0, 0, 0, 0.8);
+                    color: #aaaaaa;
+                }
+
+                #carousel-1:checked ~ .control-1,
+                #carousel-2:checked ~ .control-2,
+                #carousel-3:checked ~ .control-3 {
+                    display: block;
+                }
+
+                .carousel-indicators {
+                    list-style: none;
+                    margin: 0;
+                    padding: 0;
+                    position: absolute;
+                    bottom: 2%;
+                    left: 0;
+                    right: 0;
+                    text-align: center;
+                    z-index: 10;
+                }
+
+                .carousel-indicators li {
+                    display: inline-block;
+                    margin: 0 5px;
+                }
+
+                .carousel-bullet {
+                    color: #fff;
+                    cursor: pointer;
+                    display: block;
+                    font-size: 35px;
+                }
+
+                .carousel-bullet:hover {
+                    color: #aaaaaa;
+                }
+
+                #carousel-1:checked ~ .control-1 ~ .carousel-indicators li:nth-child(1) .carousel-bullet,
+                #carousel-2:checked ~ .control-2 ~ .carousel-indicators li:nth-child(2) .carousel-bullet,
+                #carousel-3:checked ~ .control-3 ~ .carousel-indicators li:nth-child(3) .carousel-bullet {
+                    color: #428bca;
+                }
+
+
+                .front-product{    
+                    -webkit-animation: slide-left 3s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;
+                    animation: slide-left 3s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;
+                }
+
+                /**
+                    * ----------------------------------------
+                    * animation slide-left
+                    * ----------------------------------------
+                    */
+                    @-webkit-keyframes slide-left {
+                    0% {
+                        -webkit-transform: translateX(0);
+                                transform: translateX(0);
+                    }
+                    100% {
+                        -webkit-transform: translateX(-100px);
+                                transform: translateX(-100px);
+                    }
+                    }
+                    @keyframes slide-left {
+                    0% {
+                        -webkit-transform: translateX(0);
+                                transform: translateX(0);
+                    }
+                    100% {
+                        -webkit-transform: translateX(-100px);
+                                transform: translateX(-100px);
+                    }
+                    }
+                    #slideshow { 
+                        
+                        height: 680px; 
+                        
+                        box-shadow: 0 0 20px rgba(0,0,0,0.4); 
+                    }
+
+                    #slideshow > div { 
+                        position: absolute; 
+                        top: 10px; 
+                        left: 10px; 
+                        right: 10px; 
+                        bottom: 10px; 
+                    }
+            </style>
+
+
+        <div class="relative ">
+            <div id="slideshow" class="sliderAx relative  w-screen h-4/5 ">
+                    <div class="absolute bg-cover bg-center pt-40 h-auto text-white py-24 px-10 object-fill" style="background-image: url(https://jiju.co/wp-content/uploads/2021/01/slider-4.jpg)">
+                        <div class=" md:w-1/2">
+                            <p class="font-bold text-sm uppercase">Welcome</p>
+                            <p class="text-3xl font-bold">Hello world</p>
+                            <p class="text-2xl mb-10 leading-none">Text</p>
+                            <a href="<?php echo site_url(); ?>/shop" target="_blank" class="bg-red-800 py-4 px-8 text-white font-bold uppercase text-xs rounded hover:bg-gray-200 hover:text-gray-800">Explore</a>
+                        </div>  
+                    </div> <!-- container -->
+                    <br>
+               
+                    <div class=" bg-cover bg-top pt-40 h-auto text-white py-24 px-10 object-fill" style=" background-image: url(https://jiju.co/wp-content/uploads/2021/01/slider-5.jpg)"> 
+                        <p class="font-bold text-sm uppercase">Welcome</p>
+                        <p class="text-3xl font-bold">Hello world</p>
+                        <p class="text-2xl mb-10 leading-none">Text</p>
+                        <a href="<?php echo site_url(); ?>/shop" target="_blank" class="bg-red-800 py-4 px-8 text-white font-bold uppercase text-xs rounded hover:bg-gray-200 hover:text-gray-800">Explore</a>
+                    </div> <!-- container -->
+                    <br>
+              
+            </div>
+        </div>
+
+
+<script>
+        $("#slideshow > div:gt(0)").hide();
+
+        setInterval(function() { 
+        $('#slideshow > div:first')
+        .fadeOut(1000)
+        .next()
+        .fadeIn(1000)
+        .end()
+        .appendTo('#slideshow');
+        }, 3000);
+</script>
+        <div class="front-product  container mx-auto">
+            
+            <div class="text-gray-900">
+                     <?php
+                        $args = array(
+                            'post_type' => 'product',
+                            'post_status' => 'publish',
+                            'posts_per_page' => 1
+                            );
+                        $loop = new WP_Query( $args );
+                        if ( $loop->have_posts() ) {
+                            while ( $loop->have_posts() ) : $loop->the_post();
+                                do_action( 'woocommerce_shop_loop' );
+                                wc_get_template_part( 'content', 'product' );
+                            endwhile;
+                        } else {
+                            echo __( 'No products found' );
+                        }
+                        wp_reset_postdata();
+                    ?>
+                    
+            </div>   
+        </div>
+        <!--video section-->
+        <div class="bg-black">
+            <div class="container mx-auto">
+                <div class="flex py-16 px-12 justify-center items-center ">
+                  
+                    <video autoplay="autoplay" loop="loop" muted=""  width="700" height="360"><source src="https://jiju.co/wp-content/uploads/2021/05/Q7-Kookah-1.mp4" type="video/mp4"><source src="movie.ogg" type="video/ogg">Your browser does not support the video tag.</video>
+                </div>
+            </div>    
+        </div>
+        <!--end-->
+        <div class="heading flex justify-center items-center pt-20">
+            <h3 class=" text-2xl text-black font-semibold"> Top Categories</h3>
+        </div>
+        <div class=" flex justify-center items-center">
+                       
+
+            <div class="flex flex-col lg:grid lg:grid-cols-2  p-8">
+                <div class="col-span-1 py-2">
+                    <div class="relative w-full h-auto">
+                        <a href="#" target="_blank">
+                        
+                            <img  src="https://jiju.co/wp-content/uploads/2021/05/8-1.jpg" alt="" class="rounded-2xl relative">                     
+                            <div class="absolute inset-0 text-center  text-xl p-4 w-full text-white font-bold"><p>Vaporizers</p></div>
+                            
+                        </a>
+                    </div>
+                </div>
+                <div class="col-span-1 py-2">
+                    <div class="relative w-full h-full">
+                        <a href="#" target="_blank">
+                        
+                            <img  src="https://jiju.co/wp-content/uploads/2021/05/8-1.jpg" alt="image" class="rounded-2xl relative">                     
+                            <div class="absolute inset-0 text-center text-xl p-4 w-full text-white font-bold"><p>for concentrates</p></div>
+                            
+                        </a>
+                    </div>
+                </div>
+                <div class="col-span-1 py-2">
+                    <div class="relative w-full h-20">
+                        <a href="#" target="_blank">
+                        
+                            <img src="https://jiju.co/wp-content/uploads/2021/05/tokes-banner.jpg" alt="" class="rounded-2xl relative">                     
+                            <div class="absolute inset-0 text-center text-xl p-4 w-full text-white font-bold"><p>Hookah</p></div>
+                            
+                        </a>
+                    </div>
+                </div>
+                <div class="col-span-1 py-2">
+                    <div class="relative w-full h-full">
+                        <a href="#" target="_blank">
+                        
+                            <img src="https://jiju.co/wp-content/uploads/2021/05/tokes-banner.jpg" alt="" class="rounded-2xl relative">                     
+                            <div class="absolute inset-0 text-center text-xl p-4 w-full text-white font-bold"><p>Accessories</p></div>
+                            
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+
+            
+  
+           
+            
+                    </div><!-- .col-full -->
+                </main><!-- #content -->
+            
+               
+                        <div class="heading flex justify-center items-center ">
+                             <h3 class=" text-2xl text-black font-semibold"> Get inspired</h3>
+                        </div>
+                        
+                        <div class=" flex flex-row justify-center items-center">
+                            <!-- 1 card -->
+                            <div class="relative bg-white py-6 px-6 rounded-3xl w-64 my-4 shadow-xl">
+                                <div class=" text-white flex items-center absolute rounded-full py-4 px-4 shadow-xl  left-4 -top-6">
+                                    <!-- svg  -->
+                                    
+                                </div>
+                                <a href="https://www.instagram.com/p/COt5DRQMprW/" class="mt-8">
+                                    <img src="https://jiju.co/wp-content/uploads/sb-instagram-feed-images/184098857_912015366199419_5446759498706659697_nlow.jpg" alt="Grind it and puff. #jijuofficial #420#grinder#weedgrinder#herbgrinder#420community#portablegrinder#smokeshop#smokeshoplife#smokeshoplifestyle#wholesale#b2b#b2bmarketing#cannabiscommunity#cannabisculture#cannafamily#weedlife#smoke#stoner#jijuproducts#jijugrindercollection">
+                                </a>
+                            </div>
+            
+                            <!-- 2 card -->
+                            <div class="relative bg-white py-6 px-6 rounded-3xl w-64 my-4 shadow-xl">
+                                <div class=" text-white flex items-center absolute rounded-full py-4 px-4 shadow-xl left-4 -top-6">
+                                    <!-- svg  -->
+                                    
+                                </div>
+                                <a href="https://www.instagram.com/p/COrBDZkMcD3/" class="mt-8">
+                                    <img src="https://jiju.co/wp-content/uploads/sb-instagram-feed-images/183233229_1139934993137464_8394944490830328118_nlow.jpg" alt="Taking a classic trip with us...Premium grinder by Jiju. #jijuofficial #420#grinder#weedgrinder#herbgrinder#420community#portablegrinder#smokeshop#smokeshoplife#smokeshoplifestyle#wholesale#b2b#b2bmarketing#cannabiscommunity#cannabisculture#cannafamily#weedlife#smoke#stoner#jijuproducts#jijugrindercollection">
+                                </a>
+                            </div>
+            
+                            <!-- 3 card -->
+                            <div class="relative bg-white py-6 px-6 rounded-3xl w-64 my-4 shadow-xl">
+                                <div class=" text-white flex items-center absolute rounded-full py-4 px-4 shadow-xl  left-4 -top-6">
+                                    <!-- svg  -->
+                                    
+                                </div>
+                                <a href="https://www.instagram.com/p/COmEdy6jUS_/" class="mt-8">
+                                    <img src="https://jiju.co/wp-content/uploads/sb-instagram-feed-images/183250730_213268260325953_2779876098129028594_nlow.jpg" alt="Chill anywhere. #jijuofficial #420#hookah#hookahlovers#hookahlounge#420community#smokeshop#smokeshoplife#smokeshoplifestyle#wholesale#b2b#b2bmarketing#cannabiscommunity#cannabisculture#cannafamily#weedlife#smoke#stoner#jijuproducts#jijuhookahcollection" >
+                                </a>
+                            </div>
+            
+                            <!-- 4 card -->
+                            <div class="relative bg-white py-6 px-6 rounded-3xl w-64 my-4 shadow-xl">
+                                <div class=" text-white flex items-center absolute rounded-full py-4 px-4 shadow-xl left-4 -top-6">
+                                    <!-- svg  -->
+                                   
+                                </div>
+                                <a href="https://www.instagram.com/p/COkUMlnMc_c/" class="mt-8">
+                                    <img src="https://jiju.co/wp-content/uploads/sb-instagram-feed-images/182569094_538371504216339_3792035847217483678_nlow.jpg" alt="Electronic is the new future. #jijuofficial #420#hookah#hookahlovers#hookahlounge#420community#smokeshop#smokeshoplife#smokeshoplifestyle#wholesale#b2b#b2bmarketing#cannabiscommunity#cannabisculture#cannafamily#weedlife#smoke#stoner#jijuproducts#jijuhookahcollection">
+                                </a>
+                            </div>
+                        </div>
+                        <div class="flex flex-row justify-center items-center">
+                            <button class="border rounded-lg bg-red-500 text-base mx-10 h-10 w-24 text-white">Load More</button>  
+                            <button class="border rounded-lg bg-red-500 text-base mx-10 h-10 w-32 text-white">Follow On IG</button>
+                        </div>
+                    
+                    <div class="max-w-6xl m-auto text-gray-800 flex flex-wrap justify-center items-center">
+                        <!-- Col-1 -->
+                        <div class="p-5 w-1/2 sm:w-4/12 md:w-3/12">
+                            <!-- Col Title -->
+                            <div class="text-xs uppercase text-gray-900 font-medium mb-6">
+                                        Compnay
+                                    </div>
+            
+                                    <!-- Links -->
+                                    <a href="#" class="my-3 block text-gray-800 hover:text-gray-100 text-sm font-medium duration-700">
+                                        About Us
+                                    </a>
+                                    <a href="#" class="my-3 block text-gray-800 hover:text-gray-100 text-sm font-medium duration-700">
+                                        Careers
+                                    </a>
+                                    <a href="#" class="my-3 block text-gray-900 hover:text-gray-100 text-sm font-medium duration-700">
+                                        Affiliates
+                                    </a>
+                        </div>
+                
+                        <!-- Col-2 -->
+                        <div class="p-5 w-1/2 sm:w-4/12 md:w-3/12">
+                            <!-- Col Title -->
+                                    <div class="text-xs uppercase text-gray-900 font-medium mb-6">
+                                        Shops
+                                    </div>
+            
+                                    <!-- Links -->
+                                    <a href="#" class="my-3 block text-gray-900 hover:text-gray-100 text-sm font-medium duration-700">
+                                        Bongs
+                                    </a>
+                                    <a href="#" class="my-3 block text-gray-900 hover:text-gray-100 text-sm font-medium duration-700">
+                                        Ginders
+                                    </a>
+                        </div>
+                
+                        <!-- Col-3 -->
+                        <div class="p-5 w-1/2 sm:w-4/12 md:w-3/12">
+                            <!-- Col Title -->
+                            <div class="text-xs uppercase text-gray-900 font-medium mb-6">
+                                        Support
+                                    </div>
+                                    <!-- Links -->
+                                    <a href="#" class="my-3 block text-gray-900 hover:text-gray-100 text-sm font-medium duration-700">
+                                        Contact Us
+                                    </a>
+                                    <a href="#" class="my-3 block text-gray-900 hover:text-gray-100 text-sm font-medium duration-700">
+                                        Returns
+                                    </a>
+                                    <a href="#" class="my-3 block text-gray-900 hover:text-gray-100 text-sm font-medium duration-700">
+                                        Frequently Asked Questions
+                                    </a>
+                        </div>
+                
+                        <!-- Col-3 -->
+                        <div class="p-5 w-1/2 sm:w-4/12 md:w-3/12">
+                            <!-- Col Title -->
+                                <div class="text-xs uppercase text-gray-900 font-medium mb-6">
+                                        Legal
+                                </div>
+                                <!-- Links -->
+                                <a href="#" class="my-3 block text-gray-900 hover:text-gray-100 text-sm font-medium duration-700">
+                                    Term & Conditions
+                                </a>
+                                <a href="#" class="my-3 block text-gray-900 hover:text-gray-100 text-sm font-medium duration-700">
+                                    Privacy & Coockies
+                                </a>
+                                <a href="#" class="my-3 block text-gray-900 hover:text-gray-100 text-sm font-medium duration-700">
+                                    Legal Issues
+                                </a>
+                        </div>
+                    </div>
+            </div>
+                     
+                      
+                    
+               
+                <footer class="bg-white ">
+                    
+            
+            
+                    <div class="flex items-center justify-center py-7">
+                            <div class="md:w-2/5 w-full px-4 text-white flex flex-col">
+                                <div class="w-full text-4xl font-bold">
+                                    <h1 class="w-full md:w-3/3">
+                                        Never Miss an E-mail
+                                    </h1>
+                                </div>
+                                <div class="flex mt-8 flex-col md:flex-row md:justify-between">
+                                    
+                                    <input class="w-32 border border-black md:w-2/3 text-gray-400" type="text" placeholder="Enter Email">
+                                    <div class="w-44 pt-6 md:pt-0">
+                                        <button class="bg-red-500 justify-center text-center rounded-lg shadow px-10 py-3 flex items-center">Contact US</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    
+                    <!-- Copyright Bar -->
+                    <div class="flex flex-wrap items-center justify-center md:justify-between px-44 pb-11">
+                    <div class="flex ">
+                     <a href="#">
+                                <svg class="h-6 w-6 fill-current text-black mr-6" viewBox="0 0 512 512">
+                                    <path d="M455.27,32H56.73A24.74,24.74,0,0,0,32,56.73V455.27A24.74,24.74,0,0,0,56.73,480H256V304H202.45V240H256V189c0-57.86,40.13-89.36,91.82-89.36,24.73,0,51.33,1.86,57.51,2.68v60.43H364.15c-28.12,0-33.48,13.3-33.48,32.9V240h67l-8.75,64H330.67V480h124.6A24.74,24.74,0,0,0,480,455.27V56.73A24.74,24.74,0,0,0,455.27,32Z"/>
+                                </svg>
+                            </a>
+                            <a href="#">
+                                <svg fill="none"  class="h-6 w-6 text-black mr-6" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/>
+                                </svg>
+                            </a>
+                            <a href="#">
+                                <svg class="h-6 w-6 fill-current text-black mr-6" viewBox="0 0 512 512">
+                                    <path d="M444.17,32H70.28C49.85,32,32,46.7,32,66.89V441.61C32,461.91,49.85,480,70.28,480H444.06C464.6,480,480,461.79,480,441.61V66.89C480.12,46.7,464.6,32,444.17,32ZM170.87,405.43H106.69V205.88h64.18ZM141,175.54h-.46c-20.54,0-33.84-15.29-33.84-34.43,0-19.49,13.65-34.42,34.65-34.42s33.85,14.82,34.31,34.42C175.65,160.25,162.35,175.54,141,175.54ZM405.43,405.43H341.25V296.32c0-26.14-9.34-44-32.56-44-17.74,0-28.24,12-32.91,23.69-1.75,4.2-2.22,9.92-2.22,15.76V405.43H209.38V205.88h64.18v27.77c9.34-13.3,23.93-32.44,57.88-32.44,42.13,0,74,27.77,74,87.64Z"/>
+                                </svg>
+                            </a>
+                            <a href="#">
+                                <svg class="h-6 w-6 fill-current text-black mr-6" viewBox="0 0 512 512">
+                                    <path d="M496,109.5a201.8,201.8,0,0,1-56.55,15.3,97.51,97.51,0,0,0,43.33-53.6,197.74,197.74,0,0,1-62.56,23.5A99.14,99.14,0,0,0,348.31,64c-54.42,0-98.46,43.4-98.46,96.9a93.21,93.21,0,0,0,2.54,22.1,280.7,280.7,0,0,1-203-101.3A95.69,95.69,0,0,0,36,130.4C36,164,53.53,193.7,80,211.1A97.5,97.5,0,0,1,35.22,199v1.2c0,47,34,86.1,79,95a100.76,100.76,0,0,1-25.94,3.4,94.38,94.38,0,0,1-18.51-1.8c12.51,38.5,48.92,66.5,92.05,67.3A199.59,199.59,0,0,1,39.5,405.6,203,203,0,0,1,16,404.2,278.68,278.68,0,0,0,166.74,448c181.36,0,280.44-147.7,280.44-275.8,0-4.2-.11-8.4-.31-12.5A198.48,198.48,0,0,0,496,109.5Z"/>
+                                </svg>
+                            </a>
+                     </div>
+                    <p class="inline-flex text-sm text-gray-800 pb-6 pt-6">
+                      Copyright 2021. AllRights Reserved.
+                    </p>
+                    
+                    <div class="flex items-center justify-between">
+                          <ul class="payment-icons list--inline flex items-center space-x-2">
+                          <li class="payment-icon">
+                              <svg class="icon icon--full-color" xmlns="http://www.w3.org/2000/svg" role="img" viewBox="0 0 38 24" width="38" height="24" aria-labelledby="pi-american_express"><title id="pi-american_express">American Express</title><g fill="none"><path fill="#000" d="M35,0 L3,0 C1.3,0 0,1.3 0,3 L0,21 C0,22.7 1.4,24 3,24 L35,24 C36.7,24 38,22.7 38,21 L38,3 C38,1.3 36.6,0 35,0 Z" opacity=".07"></path><path fill="#006FCF" d="M35,1 C36.1,1 37,1.9 37,3 L37,21 C37,22.1 36.1,23 35,23 L3,23 C1.9,23 1,22.1 1,21 L1,3 C1,1.9 1.9,1 3,1 L35,1"></path><path fill="#FFF" d="M8.971,10.268 L9.745,12.144 L8.203,12.144 L8.971,10.268 Z M25.046,10.346 L22.069,10.346 L22.069,11.173 L24.998,11.173 L24.998,12.412 L22.075,12.412 L22.075,13.334 L25.052,13.334 L25.052,14.073 L27.129,11.828 L25.052,9.488 L25.046,10.346 L25.046,10.346 Z M10.983,8.006 L14.978,8.006 L15.865,9.941 L16.687,8 L27.057,8 L28.135,9.19 L29.25,8 L34.013,8 L30.494,11.852 L33.977,15.68 L29.143,15.68 L28.065,14.49 L26.94,15.68 L10.03,15.68 L9.536,14.49 L8.406,14.49 L7.911,15.68 L4,15.68 L7.286,8 L10.716,8 L10.983,8.006 Z M19.646,9.084 L17.407,9.084 L15.907,12.62 L14.282,9.084 L12.06,9.084 L12.06,13.894 L10,9.084 L8.007,9.084 L5.625,14.596 L7.18,14.596 L7.674,13.406 L10.27,13.406 L10.764,14.596 L13.484,14.596 L13.484,10.661 L15.235,14.602 L16.425,14.602 L18.165,10.673 L18.165,14.603 L19.623,14.603 L19.647,9.083 L19.646,9.084 Z M28.986,11.852 L31.517,9.084 L29.695,9.084 L28.094,10.81 L26.546,9.084 L20.652,9.084 L20.652,14.602 L26.462,14.602 L28.076,12.864 L29.624,14.602 L31.499,14.602 L28.987,11.852 L28.986,11.852 Z"></path></g></svg>
+            
+                            </li><li class="payment-icon">
+                              <svg class="icon icon--full-color" version="1.1" xmlns="http://www.w3.org/2000/svg" role="img" x="0" y="0" width="38" height="24" viewBox="0 0 165.521 105.965" xml:space="preserve" aria-labelledby="pi-apple_pay"><title id="pi-apple_pay">Apple Pay</title><path fill="#000" d="M150.698 0H14.823c-.566 0-1.133 0-1.698.003-.477.004-.953.009-1.43.022-1.039.028-2.087.09-3.113.274a10.51 10.51 0 0 0-2.958.975 9.932 9.932 0 0 0-4.35 4.35 10.463 10.463 0 0 0-.975 2.96C.113 9.611.052 10.658.024 11.696a70.22 70.22 0 0 0-.022 1.43C0 13.69 0 14.256 0 14.823v76.318c0 .567 0 1.132.002 1.699.003.476.009.953.022 1.43.028 1.036.09 2.084.275 3.11a10.46 10.46 0 0 0 .974 2.96 9.897 9.897 0 0 0 1.83 2.52 9.874 9.874 0 0 0 2.52 1.83c.947.483 1.917.79 2.96.977 1.025.183 2.073.245 3.112.273.477.011.953.017 1.43.02.565.004 1.132.004 1.698.004h135.875c.565 0 1.132 0 1.697-.004.476-.002.952-.009 1.431-.02 1.037-.028 2.085-.09 3.113-.273a10.478 10.478 0 0 0 2.958-.977 9.955 9.955 0 0 0 4.35-4.35c.483-.947.789-1.917.974-2.96.186-1.026.246-2.074.274-3.11.013-.477.02-.954.022-1.43.004-.567.004-1.132.004-1.699V14.824c0-.567 0-1.133-.004-1.699a63.067 63.067 0 0 0-.022-1.429c-.028-1.038-.088-2.085-.274-3.112a10.4 10.4 0 0 0-.974-2.96 9.94 9.94 0 0 0-4.35-4.35A10.52 10.52 0 0 0 156.939.3c-1.028-.185-2.076-.246-3.113-.274a71.417 71.417 0 0 0-1.431-.022C151.83 0 151.263 0 150.698 0z"></path><path fill="#FFF" d="M150.698 3.532l1.672.003c.452.003.905.008 1.36.02.793.022 1.719.065 2.583.22.75.135 1.38.34 1.984.648a6.392 6.392 0 0 1 2.804 2.807c.306.6.51 1.226.645 1.983.154.854.197 1.783.218 2.58.013.45.019.9.02 1.36.005.557.005 1.113.005 1.671v76.318c0 .558 0 1.114-.004 1.682-.002.45-.008.9-.02 1.35-.022.796-.065 1.725-.221 2.589a6.855 6.855 0 0 1-.645 1.975 6.397 6.397 0 0 1-2.808 2.807c-.6.306-1.228.511-1.971.645-.881.157-1.847.2-2.574.22-.457.01-.912.017-1.379.019-.555.004-1.113.004-1.669.004H14.801c-.55 0-1.1 0-1.66-.004a74.993 74.993 0 0 1-1.35-.018c-.744-.02-1.71-.064-2.584-.22a6.938 6.938 0 0 1-1.986-.65 6.337 6.337 0 0 1-1.622-1.18 6.355 6.355 0 0 1-1.178-1.623 6.935 6.935 0 0 1-.646-1.985c-.156-.863-.2-1.788-.22-2.578a66.088 66.088 0 0 1-.02-1.355l-.003-1.327V14.474l.002-1.325a66.7 66.7 0 0 1 .02-1.357c.022-.792.065-1.717.222-2.587a6.924 6.924 0 0 1 .646-1.981c.304-.598.7-1.144 1.18-1.623a6.386 6.386 0 0 1 1.624-1.18 6.96 6.96 0 0 1 1.98-.646c.865-.155 1.792-.198 2.586-.22.452-.012.905-.017 1.354-.02l1.677-.003h135.875"></path><g><g><path fill="#000" d="M43.508 35.77c1.404-1.755 2.356-4.112 2.105-6.52-2.054.102-4.56 1.355-6.012 3.112-1.303 1.504-2.456 3.959-2.156 6.266 2.306.2 4.61-1.152 6.063-2.858"></path><path fill="#000" d="M45.587 39.079c-3.35-.2-6.196 1.9-7.795 1.9-1.6 0-4.049-1.8-6.698-1.751-3.447.05-6.645 2-8.395 5.1-3.598 6.2-.95 15.4 2.55 20.45 1.699 2.5 3.747 5.25 6.445 5.151 2.55-.1 3.549-1.65 6.647-1.65 3.097 0 3.997 1.65 6.696 1.6 2.798-.05 4.548-2.5 6.247-5 1.95-2.85 2.747-5.6 2.797-5.75-.05-.05-5.396-2.101-5.446-8.251-.05-5.15 4.198-7.6 4.398-7.751-2.399-3.548-6.147-3.948-7.447-4.048"></path></g><g><path fill="#000" d="M78.973 32.11c7.278 0 12.347 5.017 12.347 12.321 0 7.33-5.173 12.373-12.529 12.373h-8.058V69.62h-5.822V32.11h14.062zm-8.24 19.807h6.68c5.07 0 7.954-2.729 7.954-7.46 0-4.73-2.885-7.434-7.928-7.434h-6.706v14.894z"></path><path fill="#000" d="M92.764 61.847c0-4.809 3.665-7.564 10.423-7.98l7.252-.442v-2.08c0-3.04-2.001-4.704-5.562-4.704-2.938 0-5.07 1.507-5.51 3.82h-5.252c.157-4.86 4.731-8.395 10.918-8.395 6.654 0 10.995 3.483 10.995 8.89v18.663h-5.38v-4.497h-.13c-1.534 2.937-4.914 4.782-8.579 4.782-5.406 0-9.175-3.222-9.175-8.057zm17.675-2.417v-2.106l-6.472.416c-3.64.234-5.536 1.585-5.536 3.95 0 2.288 1.975 3.77 5.068 3.77 3.95 0 6.94-2.522 6.94-6.03z"></path><path fill="#000" d="M120.975 79.652v-4.496c.364.051 1.247.103 1.715.103 2.573 0 4.029-1.09 4.913-3.899l.52-1.663-9.852-27.293h6.082l6.863 22.146h.13l6.862-22.146h5.927l-10.216 28.67c-2.34 6.577-5.017 8.735-10.683 8.735-.442 0-1.872-.052-2.261-.157z"></path></g></g></svg>
+            
+                            </li><li class="payment-icon">
+                              <svg class="icon icon--full-color" xmlns="http://www.w3.org/2000/svg" role="img" viewBox="0 0 38 24" width="38" height="24" aria-labelledby="pi-discover"><title id="pi-discover">Discover</title><path d="M35 0H3C1.3 0 0 1.3 0 3v18c0 1.7 1.4 3 3 3h32c1.7 0 3-1.3 3-3V3c0-1.7-1.4-3-3-3z" fill="#000" opacity=".07"></path><path d="M35 1c1.1 0 2 .9 2 2v18c0 1.1-.9 2-2 2H3c-1.1 0-2-.9-2-2V3c0-1.1.9-2 2-2h32" fill="#FFF"></path><path d="M37 16.95V21c0 1.1-.9 2-2 2H23.228c7.896-1.815 12.043-4.601 13.772-6.05z" fill="#EDA024"></path><path fill="#494949" d="M9 11h20v2H9z"></path><path d="M22 12c0 1.7-1.3 3-3 3s-3-1.4-3-3 1.4-3 3-3c1.7 0 3 1.3 3 3z" fill="#EDA024"></path></svg>
+            
+                            </li><li class="payment-icon">
+                              <svg class="icon icon--full-color" viewBox="0 0 38 24" xmlns="http://www.w3.org/2000/svg" role="img" width="38" height="24" aria-labelledby="pi-master"><title id="pi-master">Mastercard</title><path opacity=".07" d="M35 0H3C1.3 0 0 1.3 0 3v18c0 1.7 1.4 3 3 3h32c1.7 0 3-1.3 3-3V3c0-1.7-1.4-3-3-3z"></path><path fill="#fff" d="M35 1c1.1 0 2 .9 2 2v18c0 1.1-.9 2-2 2H3c-1.1 0-2-.9-2-2V3c0-1.1.9-2 2-2h32"></path><circle fill="#EB001B" cx="15" cy="12" r="7"></circle><circle fill="#F79E1B" cx="23" cy="12" r="7"></circle><path fill="#FF5F00" d="M22 12c0-2.4-1.2-4.5-3-5.7-1.8 1.3-3 3.4-3 5.7s1.2 4.5 3 5.7c1.8-1.2 3-3.3 3-5.7z"></path></svg>
+                            </li><li class="payment-icon">
+                              <svg class="icon icon--full-color" viewBox="0 0 38 24" xmlns="http://www.w3.org/2000/svg" role="img" width="38" height="24" aria-labelledby="pi-visa"><title id="pi-visa">Visa</title><path opacity=".07" d="M35 0H3C1.3 0 0 1.3 0 3v18c0 1.7 1.4 3 3 3h32c1.7 0 3-1.3 3-3V3c0-1.7-1.4-3-3-3z"></path><path fill="#fff" d="M35 1c1.1 0 2 .9 2 2v18c0 1.1-.9 2-2 2H3c-1.1 0-2-.9-2-2V3c0-1.1.9-2 2-2h32"></path><path d="M28.3 10.1H28c-.4 1-.7 1.5-1 3h1.9c-.3-1.5-.3-2.2-.6-3zm2.9 5.9h-1.7c-.1 0-.1 0-.2-.1l-.2-.9-.1-.2h-2.4c-.1 0-.2 0-.2.2l-.3.9c0 .1-.1.1-.1.1h-2.1l.2-.5L27 8.7c0-.5.3-.7.8-.7h1.5c.1 0 .2 0 .2.2l1.4 6.5c.1.4.2.7.2 1.1.1.1.1.1.1.2zm-13.4-.3l.4-1.8c.1 0 .2.1.2.1.7.3 1.4.5 2.1.4.2 0 .5-.1.7-.2.5-.2.5-.7.1-1.1-.2-.2-.5-.3-.8-.5-.4-.2-.8-.4-1.1-.7-1.2-1-.8-2.4-.1-3.1.6-.4.9-.8 1.7-.8 1.2 0 2.5 0 3.1.2h.1c-.1.6-.2 1.1-.4 1.7-.5-.2-1-.4-1.5-.4-.3 0-.6 0-.9.1-.2 0-.3.1-.4.2-.2.2-.2.5 0 .7l.5.4c.4.2.8.4 1.1.6.5.3 1 .8 1.1 1.4.2.9-.1 1.7-.9 2.3-.5.4-.7.6-1.4.6-1.4 0-2.5.1-3.4-.2-.1.2-.1.2-.2.1zm-3.5.3c.1-.7.1-.7.2-1 .5-2.2 1-4.5 1.4-6.7.1-.2.1-.3.3-.3H18c-.2 1.2-.4 2.1-.7 3.2-.3 1.5-.6 3-1 4.5 0 .2-.1.2-.3.2M5 8.2c0-.1.2-.2.3-.2h3.4c.5 0 .9.3 1 .8l.9 4.4c0 .1 0 .1.1.2 0-.1.1-.1.1-.1l2.1-5.1c-.1-.1 0-.2.1-.2h2.1c0 .1 0 .1-.1.2l-3.1 7.3c-.1.2-.1.3-.2.4-.1.1-.3 0-.5 0H9.7c-.1 0-.2 0-.2-.2L7.9 9.5c-.2-.2-.5-.5-.9-.6-.6-.3-1.7-.5-1.9-.5L5 8.2z" fill="#142688"></path></svg>
+                            </li>
+                          </ul>
+                    </div>
+                   
+                </div>
+                </footer>
+                <script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.4.1.min.js"></script>
+              <script>
+              
+              
+              </script>
+                   
+                </div>
+                    
+            
+                
+            
+            </div><!-- #page -->
+            
+            
+            
+            
+            
+            <?php wp_footer(); ?>
+            
+            </body>
+            </html>
+            
